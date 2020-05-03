@@ -1,0 +1,78 @@
+@mixin clearfix {
+    &::after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin gradient{
+    background-image: linear-gradient(to right,rgba($color-primary-light,.8),rgba($color-primary-dark,.8));
+    color: transparent;
+    display: inline-block;
+    -webkit-background-clip: text;
+}
+
+@mixin absCenter{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+// MEDIA QUERY MANAGER
+/*
+0 - 600px : phone
+600-900px : tablet potrait
+900-1200px : tablet landscape
+[1200-1800px] is where our normal style apply
+1800px ++: big desktop
+
+// Order : base  + typography > general layout  + grid > page layout > components
+// we dont need many changes on that
+- phone
+- tab-port
+- tab-land
+- big-desktop
+1em = 16px
+
+only screen hanya utk screen saja, ketika document di print maka css tidak di apply
+*/ 
+
+@mixin respond($breakpoint){
+    @if $breakpoint == phone {
+        @media only screen and (max-width:37.5em){ // 600px
+            @content
+        }
+    }
+    @if $breakpoint == tab-port { // 900px
+        @media only screen and (max-width:56.25em){ 
+            @content
+        }
+    }
+    @if $breakpoint == tab-land { //1200px
+        @media only screen and (max-width:75em){
+            @content
+        }
+    }
+    @if $breakpoint == big-desktop { //1800px
+        @media only screen and (min-width:112.5em){
+            @content
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
